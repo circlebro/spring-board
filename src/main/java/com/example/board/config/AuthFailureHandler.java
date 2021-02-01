@@ -21,11 +21,12 @@ public class AuthFailureHandler implements AuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        String email = request.getParameter("email");
+        String email = request.getParameter("username");
         String password = request.getParameter("password");
 
-        request.setAttribute(loginEmail, email);
-        request.setAttribute(loginPassword, password);
+        request.setAttribute("loginEmail", email);
+        request.setAttribute("loginPassword", password);
+        request.setAttribute("checkMsg", "Incorrect username or password.");
 
         request.getRequestDispatcher("/login").forward(request, response);
 
